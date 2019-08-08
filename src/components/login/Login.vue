@@ -94,6 +94,7 @@ export default {
   methods: {
     login () {
       console.log('user', this.detail)
+      this.$router.push('/index')
     }
   }
 }
