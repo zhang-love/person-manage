@@ -1,6 +1,6 @@
 <template>
     <div class="">
-      container
+    novel-index
     </div>
 </template>
 

@@ -1,12 +1,12 @@
 <template>
     <div class="">
-      container
+      song-manage
     </div>
 </template>
 
 <script>
 export default {
-  name: 'Index',
+  name: 'Edit',
   data () {
     return {}
   }

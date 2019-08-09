@@ -1,12 +1,12 @@
 <template>
     <div class="">
-      head
+      blog-manage
     </div>
 </template>
 
 <script>
 export default {
-  name: 'CcontainerHead.vue',
+  name: 'Edit',
   data () {
     return {}
   }

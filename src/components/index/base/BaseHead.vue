@@ -1,18 +1,16 @@
 <template>
     <div class="">
-      container
     </div>
 </template>
 
 <script>
 export default {
-  name: 'Index',
+  name: 'BaseHead.vue',
   data () {
     return {}
   }
 }
 </script>
 
-<style>
-
+<style lang="less">
 </style>
