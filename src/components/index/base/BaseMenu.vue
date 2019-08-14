@@ -5,6 +5,7 @@
       class="el-menu-vertical-demo"
       @open="handleOpen"
       @close="handleClose"
+      @select="select"
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b">
@@ -31,8 +32,14 @@ export default {
   },
   methods: {
     handleOpen (key, keyPath) {
+      console.log('key', key)
+      console.log('keyPath', keyPath)
     },
     handleClose (key, keyPath) {
+    },
+    select (index, indexPath) {
+      console.log('index', index)
+      console.log('indexPath', indexPath)
     }
   }
 }

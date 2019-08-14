@@ -9,8 +9,11 @@ import '@/assets/style/index.less'
 import '@/assets/icon/iconfont.css'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import animated from 'animate.css'
+
 Vue.config.productionTip = false
 Vue.use(VueParticles)
+Vue.use(animated)
 Vue.use(ElementUI)
 
 /* eslint-disable no-new */
