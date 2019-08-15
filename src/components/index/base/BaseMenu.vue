@@ -46,9 +46,28 @@ export default {
 </script>
 <style lang="less">
   .Menu{
+    height:100%;
+    overflow: auto;
+    &::-webkit-scrollbar{
+      width:10px;
+      height:1px;
+    }
+    &::-webkit-scrollbar-thumb{
+      border-radius:10px;
+      -webkit-box-shadow:inset 0 0 5px rgba(0,0,0,0.2);
+      background: #535353;
+    }
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0);
+      border-radius: 10px;
+      background: #ccc;
+    }
     .iconName{
       font-size:18px;
       padding-left:10px;
+    }
+    .el-menu{
+      height:100%;
     }
   }
 </style>

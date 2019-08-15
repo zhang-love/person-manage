@@ -1,19 +1,17 @@
 <template>
-    <div class="Index fadeOutUp" id="index" @click="heartFactory">
-      <el-row>
-        <el-col class="">
-          <base-head></base-head>
-        </el-col>
-      </el-row>
-      <el-row class="main">
-        <el-col class="menu">
-          <base-menu></base-menu>
-        </el-col>
-        <el-col :span="12">
-          <router-view></router-view>
-        </el-col>
-      </el-row>
+  <div class="Layout" id="index" @click="heartFactory">
+    <div class="index-head">
+      <base-head></base-head>
     </div>
+    <div id="main" class="main">
+      <div class="menu">
+        <base-menu></base-menu>
+      </div>
+      <div class="main-content">
+        <router-view></router-view>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -35,8 +33,6 @@ export default {
         top: 0
       }
     }
-  },
-  mounted () {
   },
   methods: {
     heartFactory (e) {
@@ -72,14 +68,27 @@ export default {
 </script>
 
 <style lang="less">
-.Index{
+.Layout{
+  width:100%;
   background-color: #f0eef5;
   cursor:default;
+  .index-head{
+    height:80px;
+    line-height:80px;
+  }
   .main{
     margin:auto;
-    width:1200px;
+    height:calc(100vh - 80px);
     .menu{
       width:220px;
+      float:left;
+      height:100%;
+    }
+    .main-content{
+      float:left;
+      margin-top:10px;
+      height:calc(100vh - 90px);
+      width:calc(100vw - 220px)
     }
   }
    .move1{

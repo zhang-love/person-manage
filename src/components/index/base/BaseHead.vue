@@ -16,12 +16,12 @@
             </div>
           </li>
           <li>
-            <div class="person" @mouseenter="operationList($event,userOperation)">
+            <div class="person" @mouseenter="operationList($event,userOperation)" @mouseleave="initCommonUse">
               个人信息
             </div>
           </li>
         </ul>
-        <div v-show="dropDownSwitch" :style="dropDown" @mouseenter="clearDropTime" @mouseleave="initCommonUse" :class="dropDownSwitch?'downList':'upList'">
+        <div v-show="dropDownSwitch" :style="dropDown" @mouseenter="clearDropTime" @mouseleave="initCommonUse" class="downList">
           <ul>
             <li v-for="(item,index) in dropDownList" :key = "index" class="drop-down-item">
               {{item.name}}
@@ -77,6 +77,7 @@ export default {
       this.dropDownSwitch = true
       this.dropDown.top = e.path[1].offsetHeight + 'px'
       this.dropDown.left = e.path[1].offsetLeft + 'px'
+      console.log(' e.path[1].offsetLeft', e.path[1].offsetLeft)
     },
     clearDropTime () {
       clearTimeout(this.dropDownTime)
@@ -94,13 +95,15 @@ export default {
 <style lang="less">
   .BaseHead{
     background-image: url("../../../assets/img/head.jpeg");
-    height:80px;
-    line-height:80px;
+    height:100%;
+    /*height:80px;*/
+    /*line-height:80px;*/
     color:#fff;
     text-align:center;
     .head-wrap{
       margin:auto;
-      width:1200px;
+      max-width:1200px;
+      height:100%;
       .personLogo{
         font-size:22px;
         width:120px;
@@ -145,15 +148,16 @@ export default {
     .drop-down-item{
       height:40px;
       line-height:40px;
-      padding: 0 20px;
+      width:100px;
+      text-align:center;
       cursor: pointer;
       &:hover{
         background-color: #5a73ff;
       }
     }
     .downList{
-      animation: downList 1s ease-in-out;
-      -webkit-animation:downList 1s ease-in-out;
+      animation: downList .5s linear;
+      -webkit-animation:downList .5s linear;
     }
     @keyframes downList {
       from {
@@ -165,7 +169,6 @@ export default {
       }
     }
     .upList{
-      opacity: 0;
       animation: upList 1s ease-out;
       -webkit-animation:upList 1s ease-out;
     }

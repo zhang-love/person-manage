@@ -1,5 +1,5 @@
 <template>
-  <div class="Login" :style="bodySize">
+  <div class="Login">
     <vue-particles
       color="#dd2d2d"
       :particleOpacity="0.7"
@@ -102,10 +102,13 @@ export default {
 
 <style lang = "less">
   .Login{
-    width:100%;
-    height:100%;
+    width:100vw;
+    height:100vh;
     background: url('../../assets/img/login.jpg') no-repeat;
-    background-size: cover;
+    overflow:hidden;
+    #particles-js{
+      height:100%;
+    }
     .login-wrap{
       box-shadow: -15px 15px 15px rgba(6, 17, 47, 0.7);
       background: linear-gradient(230deg, rgba(53, 57, 74, 0) 0%, rgb(0, 0, 0) 100%);
