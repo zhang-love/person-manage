@@ -21,7 +21,7 @@
             </div>
           </li>
         </ul>
-        <div v-show="dropDownSwitch" :style="dropDown" @mouseenter="clearDropTime" @mouseleave="initCommonUse" class="downList">
+        <div v-show="dropDownSwitch" :style="dropDown" @mouseenter="clearDropTime" @mouseleave="initCommonUse" :class="dropDownSwitch?'downList':'upList'">
           <ul>
             <li v-for="(item,index) in dropDownList" :key = "index" class="drop-down-item">
               {{item.name}}
@@ -156,16 +156,18 @@ export default {
       }
     }
     .downList{
-      animation: downList .5s linear;
-      -webkit-animation:downList .5s linear;
+      animation: downList .3s ease-in;
+      -webkit-animation:downList .3s ease-in;
     }
     @keyframes downList {
       from {
         opacity: 0;
+        transform: translateY(-10px);
       }
 
       to {
         opacity: 1;
+        transform: translateY(0);
       }
     }
     .upList{

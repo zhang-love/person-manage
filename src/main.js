@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VueParticles from 'vue-particles'
+import echarts from '../static/js/echarts'
 
 import '@/assets/style/index.less'
 import '@/assets/icon/iconfont.css'
@@ -15,6 +16,7 @@ Vue.config.productionTip = false
 Vue.use(VueParticles)
 Vue.use(animated)
 Vue.use(ElementUI)
+Vue.use(echarts)
 
 /* eslint-disable no-new */
 new Vue({

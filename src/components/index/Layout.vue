@@ -88,7 +88,7 @@ export default {
       float:left;
       margin-top:10px;
       height:calc(100vh - 90px);
-      width:calc(100vw - 220px)
+      width:calc(100vw - 220px);
     }
   }
    .move1{
