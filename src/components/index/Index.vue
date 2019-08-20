@@ -2,7 +2,13 @@
   <div class="Index">
     <div class="index-map-wrap">
       <div class="index-map">
-        <baidu-map/>
+        <baidu-map :location="location"/>
+        <div class="search">
+          <div class="search_wrap">
+            <input class="search_inp" v-model="cityName" placeholder="城市名/街道查询">
+            <div class="search_btn" @click="search_location">搜索</div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="index-item-wrap">
@@ -30,7 +36,9 @@
             <span class="air-data-wrap">优</span>
           </div>
         </div>
-        <div id="weather-chart" class="weather-chart"></div>
+        <div class="weather-chart-wrap">
+          <div id="weather-chart" class="weather-chart"></div>
+        </div>
       </div>
     </div>
     <div class="index-statistics-wrap">
@@ -39,7 +47,20 @@
           <div id="visit-chart" class="visit-chart"></div>
         </div>
         <div class="visit-time-chart-wrap">
-          <div id="visit-time-chart" class="visit-time-chart"></div>
+          <div id="visit-time-chart" class="visit-time-chart" ></div>
+        </div>
+        <div class="test" id="test">dd</div>
+        <div class="visit-trend-chart-wrap">
+          <div id="visit-trend-chart" class="visit-trend-chart"></div>
+        </div>
+        <div class="summary-wrap">
+          <div class="summary">
+            <div class="title key">访问量总结</div>
+            <div class="section"><span class="key">访问量最多城市：</span>武汉，位于东部沿海</div>
+            <div class="section"><span class="key">访问量最少区域：</span>位于西部</div>
+            <div class="section"><span class="key">访问量高峰时间：</span>上午</div>
+            <div class="section"><span class="key">访问量趋势变化：</span>从早上6点开始逐渐增加，到中午12点最高，然后逐渐减小到0点达到最低</div>
+          </div>
         </div>
       </div>
     </div>
@@ -54,6 +75,11 @@ export default {
   components: {BaiduMap},
   data () {
     return {
+      bmap: {},
+      cityName: '',
+      location: {
+        cityName: ''
+      },
       weatherSize: {
         width: '100%',
         height: '100%'
@@ -66,27 +92,14 @@ export default {
         width: '100%',
         height: '100%'
       },
-      centerSize: {
-        m: '50%',
-        n: '66%'
-      },
       weatherChart: {},
       visitChart: {},
-      visitTimeChart: {}
+      visitTimeChart: {},
+      visitTrendChart: {}
     }
   },
   mounted () {
-    const div = document.getElementById('visit-time-chart')
-    const _this = this
-    div.addEventListener('mousedown', function (e) {
-      console.log('mousedown', e)
-      _this.centerSize.m = '10%'
-      _this.centerSize.n = '10%'
-    })
-    div.addEventListener('mouseup', function (e) {
-      console.log('e', e)
-    })
-
+    this.test()
     window.onresize = () => {
       // this.weatherSize.width = window.getComputedStyle(document.getElementById('weather-chart')).width
       // this.weatherSize.height = window.getComputedStyle(document.getElementById('weather-chart')).height
@@ -97,12 +110,32 @@ export default {
       this.weatherChart.resize()
       this.visitChart.resize()
       this.visitTimeChart.resize()
+      this.visitTrendChart.resize()
     }
     this.initWeatherChart()
     this.initVisitChart()
     this.initVisitTimeChart()
+    this.initVisitTrendChart()
   },
   methods: {
+    search_location () {
+      this.location.cityName = this.cityName
+      console.log('this.location', this.cityName)
+    },
+    test () {
+      const div = document.getElementById('test')
+      div.onmousedown = function (event) {
+        const x = div.getBoundingClientRect().x
+        const y = div.getBoundingClientRect().y
+        div.onmousemove = function (move) {
+          div.style.left = x + move.clientX - event.clientX + 'px'
+          div.style.top = y + move.clientY - event.clientY + 'px'
+        }
+      }
+      div.onmouseup = function (up) {
+        div.onmousemove = null
+      }
+    },
     initWeatherChart () {
       this.weatherChart = this.$echarts.init(document.getElementById('weather-chart'))
       this.weatherChart.setOption({
@@ -110,7 +143,7 @@ export default {
           show: true,
           type: 'plain',
           data: ['温度'],
-          x: '15%',
+          x: '30%',
           y: 'top'
         },
         tooltip: {
@@ -128,7 +161,12 @@ export default {
           name: '温度',
           data: ['29', '31', '32', '30', '27', '26', '25', '26', '29'],
           type: 'line'
-        }]
+        }],
+        grid: {
+          top: '26%',
+          left: '16%',
+          height: '60%'
+        }
       })
     },
     initVisitChart () {
@@ -223,17 +261,18 @@ export default {
           {
             name: '访问来源',
             type: 'pie',
-            center: [ this.centerSize.m, this.centerSize.n ],
+            center: [ '50%', '65%' ],
             radius: ['0%', '50%'],
+            minAngle: 27,
             avoidLabelOverlap: false,
             label: {
               show: true,
-              formatter: '{b}: {c} ({d}%)'
+              formatter: '{b}:\n{c} ({d}%)'
             },
             labelLine: {
               show: true,
-              length: 10,
-              length2: 8,
+              length: 6,
+              length2: 2,
               lineStyle: {
                 width: 1,
                 type: 'solid',
@@ -258,6 +297,38 @@ export default {
           }
         ]
       })
+    },
+    initVisitTrendChart () {
+      this.visitTrendChart = this.$echarts.init(document.getElementById('visit-trend-chart'))
+      this.visitTrendChart.setOption({
+        legend: {
+          show: true,
+          type: 'plain',
+          data: ['访问量'],
+          x: '15%',
+          y: 'top'
+        },
+        tooltip: {
+          trigger: 'axis'
+        },
+        xAxis: {
+          type: 'category',
+          data: ['现在', '11点', '14点', '17点', '20点', '23点', '2点', '05点', '08点']
+        },
+        yAxis: {
+          type: 'value',
+          name: '数量(人)'
+        },
+        series: [{
+          name: '数量',
+          data: ['29', '31', '32', '30', '27', '26', '25', '26', '29'],
+          type: 'line'
+        }],
+        grid: {
+          top: '26%',
+          height: '60%'
+        }
+      })
     }
   }
 }
@@ -272,9 +343,46 @@ export default {
       max-height:500px;
       float:left;
       .index-map{
+        position:relative;
         height:calc(100% - 4px);
+        width:100%;
         margin:0 10px;
         border:2px solid #8fcbf5;
+        .search{
+          position:absolute;
+          left:4%;
+          top:2%;
+          background: #fff;
+          width:30%;
+          input{
+            background:none;
+            outline:none;
+            border:none;
+          }
+          .search_wrap{
+            border:2px solid red;
+            padding:6px 10px 5px;
+            position:relative;
+            width:100%;
+            .search_inp{
+              border:0px;
+              height:20px;
+              width:calc(100% - 50px)
+            }
+            .search_btn{
+              position:absolute;
+              right:0;
+              top:0;
+              width:50px;
+              color:#fff;
+              height:33px;
+              line-height:33px;
+              text-align:center;
+              background:red;
+
+            }
+          }
+        }
       }
     }
     .index-item-wrap{
@@ -337,8 +445,11 @@ export default {
             }
           }
         }
+        .weather-chart-wrap{
+          height:calc(100% - 270px);
+        }
         .weather-chart{
-          height:calc(100% - 230px);
+          height:100%;
         }
       }
     }
@@ -354,7 +465,7 @@ export default {
         .visit-chart-wrap{
           width:25%;
           height:100%;
-          display:inline-block;
+          float:left;
           .visit-chart{
             width:100%;
             height:100%;
@@ -363,10 +474,66 @@ export default {
         .visit-time-chart-wrap{
           width:25%;
           height:100%;
-          display:inline-block;
+          float:left;
           .visit-time-chart{
             width:100%;
             height:100%;
+          }
+        }
+        .test{
+          display:inline-block;
+          width:100px;
+          height:100px;
+          cursor: pointer;
+          position: absolute;
+          top: 1px;
+          left:1px;
+          background-color:#fff;
+        }
+        .visit-trend-chart-wrap{
+          width:25%;
+          height:100%;
+          float:left;
+          .visit-trend-chart{
+            width:100%;
+            height:100%;
+          }
+        }
+        .summary-wrap{
+          width:25%;
+          height:100%;
+          float:left;
+          .summary{
+            width:100%;
+            height:calc(100% - 4px);
+            border:2px solid #f2e3cc;
+            background-image: url('../../assets/img/bookmark.jpeg');
+            overflow: auto;
+            &::-webkit-scrollbar{
+              width:6px;
+              height:1px;
+            }
+            &::-webkit-scrollbar-thumb{
+              border-radius:6px;
+              -webkit-box-shadow:inset 0 0 5px rgba(0,0,0,0.2);
+              background: #535353;
+            }
+            &::-webkit-scrollbar-track {
+              -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0);
+              border-radius: 6px;
+              background: #ccc;
+            }
+            .title{
+              text-align:center;
+              padding:6% 0;
+            }
+            .section{
+              text-indent: 20px;
+              padding:2% 0;
+            }
+            .key{
+              font-weight: bold;
+            }
           }
         }
       }
