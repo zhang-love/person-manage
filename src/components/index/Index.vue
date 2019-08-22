@@ -44,10 +44,21 @@
           <div id="visit-time-chart" class="visit-time-chart" ></div>
         </div>
         <div class="time-range" id="time-range">
-          <div>时间选择</div>
+          <div class="tip-wrap" :class="!showTitle?'show-title-false':''">
+            <div class="tip-icon-wrap">
+              <i class="iconfont icon-tip2"></i>
+            </div>
+            <div class="border-i">
+            </div>
+            <div class="word-wrap">
+              <span class="tip-word">长按拖动</span>
+            </div>
+          </div>
+          <div class="tip-title">时间选择</div>
           <el-date-picker
             v-model="timeRange"
             type="datetimerange"
+            style="border-radius:0;"
             range-separator="至"
             start-placeholder="开始日期"
             end-placeholder="结束日期">
@@ -80,6 +91,7 @@ export default {
   data () {
     return {
       timeRange: '',
+      showTitle: true,
       weatherSize: {
         width: '100%',
         height: '100%'
@@ -121,6 +133,11 @@ export default {
   methods: {
     timeRangeEvent () {
       const div = document.getElementById('time-range')
+      const _this = this
+      div.onmouseover = function (event) {
+        console.log('onmouseover')
+        _this.showTitle = false
+      }
       div.onmousedown = function (event) {
         const x = div.getBoundingClientRect().x
         const y = div.getBoundingClientRect().y
@@ -447,9 +464,61 @@ export default {
           text-align:center;
           cursor: pointer;
           position: absolute;
-          top: 1px;
-          left:1px;
-          background-color:#f2e3cc;
+          bottom: 30%;
+          left:10px;
+          .tip-wrap{
+            text-align:left;
+            background-color:#f0f9eb;
+            letter-spacing:-4px;
+            height:26px;
+            line-height:26px;
+            width:160px;
+            .tip-icon-wrap{
+              display:inline-block;
+              width:30px;
+              padding-left:12px;
+              background-color: red;
+              vertical-align:top;
+              .iconfont{
+                color: #f9909a;
+              }
+            }
+            .border-i{
+              display:inline-block;
+              border-left:13px red solid;
+              border-top:13px #fff dotted;
+              border-bottom:13px #fff dotted;
+              width:0;
+              height:0;
+              overflow:hidden;
+              vertical-align:top;
+            }
+            .word-wrap{
+              display:inline-block;
+              letter-spacing:2px;
+              padding-left:12px;
+              .tip-word{
+                color: #575757;
+              }
+            }
+          }
+          .show-title-false{
+            animation: show-title-false 2s forwards;
+            -webkit-animation:show-title-false 2s forwards;
+          }
+          @keyframes show-title-false {
+            from {
+              transform: translateX(0);
+              opacity: 1;
+            }
+            to {
+              transform: translateX(220px);
+              opacity: 0;
+            }
+          }
+          .tip-title{
+            background-color:#f2e3cc;
+          }
         }
         .visit-trend-chart-wrap{
           width:25%;

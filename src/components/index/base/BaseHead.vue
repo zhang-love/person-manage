@@ -94,12 +94,13 @@ export default {
 
 <style lang="less">
   .BaseHead{
-    background-image: url("../../../assets/img/head.jpeg");
+    /*background-image: url("../../../assets/img/head.jpeg");*/
     height:100%;
     /*height:80px;*/
     /*line-height:80px;*/
     color:#fff;
     text-align:center;
+    background: #1d1d1d;
     .head-wrap{
       margin:auto;
       max-width:1200px;
@@ -108,6 +109,7 @@ export default {
         font-size:22px;
         width:120px;
         float:left;
+        color: #fff;
       }
       .head-right{
         font-size:18px;

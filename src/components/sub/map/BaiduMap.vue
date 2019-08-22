@@ -27,8 +27,8 @@
 
 <script>
 /* eslint-disable no-undef */
+
 import BMap from 'BMap'
-import { evils} from '../../../assets/js'
 export default {
   name: 'BaiduMap',
   data () {
@@ -55,7 +55,6 @@ export default {
     }
   },
   mounted () {
-    console.log('ssss', this.evils)
     this.initMap()
     this.setAnimated()
     this.keyDown()
@@ -65,14 +64,12 @@ export default {
       const div = document.getElementById('searchInp')
       div.onkeydown = function (e) {
         e = window.event || e
-        console.log('e.keyCode', e.keyCode)
         switch (e.keyCode) {
           case 40:
             const result0 = document.getElementById('result0')
             result0.focus()
             break
           default:
-            console.log('__')
         }
       }
     },
@@ -107,7 +104,6 @@ export default {
     initMap () {
       var mp = new BMap.Map('customizeMap')
       this.mp = mp
-      console.log('this', this)
       mp.centerAndZoom(new BMap.Point(116.3964, 39.9093), 10)
       mp.enableScrollWheelZoom()
       var _this = this
@@ -199,8 +195,7 @@ export default {
           lingrad1.addColorStop(0, 'rgb(15, 96, 255)')// 渐变色颜色
           ctx.fillStyle = lingrad1// 填充渐变色
           // let str = '&#xe610;'.replace('&#x', '\\u').replace(';', '')
-          console.log('_this', _this)
-          ctx.fillText(_this.evil('&#xe610;'), pixel.x, pixel.y)
+          ctx.fillText(_this.$commonJs.evil('&#xe610;'), pixel.x, pixel.y)
           ctx.stroke()
           const textContent = {
             x: img2Content.x,
