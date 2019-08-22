@@ -26,7 +26,14 @@ module.exports = {
   },
   externals: {
     'BMap': 'BMap',
-    'BMap_Symbol_SHAPE_POINT': 'BMap_Symbol_SHAPE_POINT'
+    'BMap_Symbol_SHAPE_POINT': 'BMap_Symbol_SHAPE_POINT',
+    'cdn-vue': 'Vue',
+    'cdn-vuex': 'Vuex',
+    'cdn-vue-router': 'VueRouter',
+    'cdn-element-ui': 'ELEMENT',
+    'cdn-axios': 'axios',
+    'cdn-echarts': 'echarts',
+    'cdn-animate': 'animate'
   },
   output: {
     path: config.build.assetsRoot,

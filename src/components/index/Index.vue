@@ -2,13 +2,7 @@
   <div class="Index">
     <div class="index-map-wrap">
       <div class="index-map">
-        <baidu-map :location="location"/>
-        <div class="search">
-          <div class="search_wrap">
-            <input class="search_inp" v-model="cityName" placeholder="城市名/街道查询">
-            <div class="search_btn" @click="search_location">搜索</div>
-          </div>
-        </div>
+        <baidu-map/>
       </div>
     </div>
     <div class="index-item-wrap">
@@ -49,7 +43,16 @@
         <div class="visit-time-chart-wrap">
           <div id="visit-time-chart" class="visit-time-chart" ></div>
         </div>
-        <div class="test" id="test">dd</div>
+        <div class="time-range" id="time-range">
+          <div>时间选择</div>
+          <el-date-picker
+            v-model="timeRange"
+            type="datetimerange"
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期">
+          </el-date-picker>
+        </div>
         <div class="visit-trend-chart-wrap">
           <div id="visit-trend-chart" class="visit-trend-chart"></div>
         </div>
@@ -69,17 +72,14 @@
 
 <script>
 import BaiduMap from '../sub/map/BaiduMap'
+import echarts from 'cdn-echarts'
 
 export default {
   name: 'Index',
   components: {BaiduMap},
   data () {
     return {
-      bmap: {},
-      cityName: '',
-      location: {
-        cityName: ''
-      },
+      timeRange: '',
       weatherSize: {
         width: '100%',
         height: '100%'
@@ -99,7 +99,8 @@ export default {
     }
   },
   mounted () {
-    this.test()
+    this.$echarts = echarts
+    this.timeRangeEvent()
     window.onresize = () => {
       // this.weatherSize.width = window.getComputedStyle(document.getElementById('weather-chart')).width
       // this.weatherSize.height = window.getComputedStyle(document.getElementById('weather-chart')).height
@@ -118,12 +119,8 @@ export default {
     this.initVisitTrendChart()
   },
   methods: {
-    search_location () {
-      this.location.cityName = this.cityName
-      console.log('this.location', this.cityName)
-    },
-    test () {
-      const div = document.getElementById('test')
+    timeRangeEvent () {
+      const div = document.getElementById('time-range')
       div.onmousedown = function (event) {
         const x = div.getBoundingClientRect().x
         const y = div.getBoundingClientRect().y
@@ -348,41 +345,6 @@ export default {
         width:100%;
         margin:0 10px;
         border:2px solid #8fcbf5;
-        .search{
-          position:absolute;
-          left:4%;
-          top:2%;
-          background: #fff;
-          width:30%;
-          input{
-            background:none;
-            outline:none;
-            border:none;
-          }
-          .search_wrap{
-            border:2px solid red;
-            padding:6px 10px 5px;
-            position:relative;
-            width:100%;
-            .search_inp{
-              border:0px;
-              height:20px;
-              width:calc(100% - 50px)
-            }
-            .search_btn{
-              position:absolute;
-              right:0;
-              top:0;
-              width:50px;
-              color:#fff;
-              height:33px;
-              line-height:33px;
-              text-align:center;
-              background:red;
-
-            }
-          }
-        }
       }
     }
     .index-item-wrap{
@@ -480,15 +442,14 @@ export default {
             height:100%;
           }
         }
-        .test{
+        .time-range{
           display:inline-block;
-          width:100px;
-          height:100px;
+          text-align:center;
           cursor: pointer;
           position: absolute;
           top: 1px;
           left:1px;
-          background-color:#fff;
+          background-color:#f2e3cc;
         }
         .visit-trend-chart-wrap{
           width:25%;

@@ -1,36 +1,36 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Login from '@/components/login/Login'
-import Layout from '@/components/index/Layout'
-import Index from '@/components/index/Index'
-import BlogIndex from '@/components/blog/Index'
-import BlogEdit from '@/components/blog/manage/Edit'
-import DataIndex from '@/components/data/Index'
-import DataEdit from '@/components/data/manage/Edit'
-import NovelIndex from '@/components/novel/Index'
-import NovelEdit from '@/components/novel/manage/Edit'
-import SongIndex from '@/components/song/Index'
-import SongEdit from '@/components/song/manage/Edit'
+// import Vue from 'cdn-vue'
+import Router from 'cdn-vue-router'
+// import Login from '@/components/login/Login'
+// import Layout from '@/components/index/Layout'
+// import Index from '@/components/index/Index'
+// import BlogIndex from '@/components/blog/Index'
+// import BlogEdit from '@/components/blog/manage/Edit'
+// import DataIndex from '@/components/data/Index'
+// import DataEdit from '@/components/data/manage/Edit'
+// import NovelIndex from '@/components/novel/Index'
+// import NovelEdit from '@/components/novel/manage/Edit'
+// import SongIndex from '@/components/song/Index'
+// import SongEdit from '@/components/song/manage/Edit'
 
-Vue.use(Router)
+// Vue.use(Router)
 
 export default new Router({
   routes: [
     {
       path: '/',
       name: 'Login',
-      component: Login
+      component: resolve => require(['@/components/login/Login'], resolve)
     },
     {
       path: '/layout',
       name: 'Layout',
-      component: Layout,
+      component: resolve => require(['@/components/index/Layout'], resolve),
       type: 0,
       children: [
         {
           path: '/index',
           name: 'Index',
-          component: Index,
+          component: resolve => require(['@/components/index/Index'], resolve),
           // type为1表示菜单项，2表示页面
           type: 2,
           meta: {
@@ -51,7 +51,7 @@ export default new Router({
           children: [
             {
               path: '/index',
-              component: BlogIndex,
+              component: resolve => require(['@/components/blog/Index'], resolve),
               type: 2,
               meta: {
                 name: '主页',
@@ -60,7 +60,7 @@ export default new Router({
             },
             {
               path: '/edit',
-              component: BlogEdit,
+              component: resolve => require(['@/components/blog/manage/Edit'], resolve),
               type: 2,
               meta: {
                 name: '管理',
@@ -81,7 +81,7 @@ export default new Router({
           children: [
             {
               path: '/index',
-              component: DataIndex,
+              component: resolve => require(['@/components/data/Index'], resolve),
               type: 2,
               meta: {
                 name: '主页',
@@ -90,7 +90,7 @@ export default new Router({
             },
             {
               path: '/edit',
-              component: DataEdit,
+              component: resolve => require(['@/components/data/manage/Edit'], resolve),
               type: 2,
               meta: {
                 name: '管理',
@@ -111,7 +111,7 @@ export default new Router({
           children: [
             {
               path: '/index',
-              component: NovelIndex,
+              component: resolve => require(['@/components/novel/Index'], resolve),
               type: 2,
               meta: {
                 name: '主页',
@@ -120,7 +120,7 @@ export default new Router({
             },
             {
               path: '/edit',
-              component: NovelEdit,
+              component: resolve => require(['@/components/novel/manage/Edit'], resolve),
               type: 2,
               meta: {
                 name: '管理',
@@ -141,7 +141,7 @@ export default new Router({
           children: [
             {
               path: '/index',
-              component: SongIndex,
+              component: resolve => require(['@/components/song/Index'], resolve),
               type: 2,
               meta: {
                 name: '主页',
@@ -150,7 +150,7 @@ export default new Router({
             },
             {
               path: '/edit',
-              component: SongEdit,
+              component: resolve => require(['@/components/song/manage/Edit'], resolve),
               type: 2,
               meta: {
                 name: '管理',

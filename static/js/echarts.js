@@ -9,7 +9,7 @@ require('echarts/lib/component/title')
 require('echarts/lib/component/legend')
 
 export default {
-  install (Vue, options) {
+  install: function (Vue, options) {
     Vue.prototype.$echarts = echarts
   }
 }

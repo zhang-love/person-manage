@@ -39,7 +39,7 @@ export default {
       const b = '❤'
       const div = document.getElementById('index')
       const h = document.createElement('div')
-      h.innerText = b
+      h.innerText = this.evil('&#xe62b;')
       h.style.position = 'absolute'
       h.style.top = e.pageY + 'px'
       h.style.left = e.pageX + 'px'
