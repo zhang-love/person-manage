@@ -92,11 +92,11 @@ export default {
       const sky = document.getElementById('sky')
       sky.style.width = window.innerWidth + 'px'
       sky.style.height = window.innerHeight + 'px'
-      window.onresize = function () {
+      window.addEventListener('resize', () => {
         sky.style.width = window.innerWidth + 'px'
         sky.style.height = window.innerHeight + 'px'
         _this.initSky()
-      }
+      })
     },
     createCircle (ctx, starSize) {
       ctx.beginPath()

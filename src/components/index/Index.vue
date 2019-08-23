@@ -54,20 +54,21 @@
               <span class="tip-word">长按拖动</span>
             </div>
           </div>
-          <div class="tip-title">时间选择</div>
-          <el-date-picker
-            v-model="timeRange"
-            type="datetimerange"
-            style="border-radius:0;"
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期">
-          </el-date-picker>
+          <div class="tip-title">我是小广告，不要拖动我</div>
+          <!--<el-date-picker-->
+            <!--v-model="timeRange"-->
+            <!--type="datetimerange"-->
+            <!--style="border-radius:0;"-->
+            <!--range-separator="至"-->
+            <!--start-placeholder="开始日期"-->
+            <!--end-placeholder="结束日期">-->
+          <!--</el-date-picker>-->
         </div>
         <div class="visit-trend-chart-wrap">
           <div id="visit-trend-chart" class="visit-trend-chart"></div>
         </div>
         <div class="summary-wrap">
+          <div class="summary-back"></div>
           <div class="summary">
             <div class="title key">访问量总结</div>
             <div class="section"><span class="key">访问量最多城市：</span>武汉，位于东部沿海</div>
@@ -113,18 +114,19 @@ export default {
   mounted () {
     this.$echarts = echarts
     this.timeRangeEvent()
-    window.onresize = () => {
-      // this.weatherSize.width = window.getComputedStyle(document.getElementById('weather-chart')).width
-      // this.weatherSize.height = window.getComputedStyle(document.getElementById('weather-chart')).height
-      // this.visitSize.width = window.getComputedStyle(document.getElementById('visit-chart')).width
-      // this.visitSize.height = window.getComputedStyle(document.getElementById('visit-chart')).height
-      // this.visitTimeSize.width = window.getComputedStyle(document.getElementById('visit-time-chart')).width
-      // this.visitTimeSize.height = window.getComputedStyle(document.getElementById('visit-time-chart')).height
-      this.weatherChart.resize()
-      this.visitChart.resize()
-      this.visitTimeChart.resize()
-      this.visitTrendChart.resize()
-    }
+    window.addEventListener('resize',
+      () => {
+        // this.weatherSize.width = window.getComputedStyle(document.getElementById('weather-chart')).width
+        // this.weatherSize.height = window.getComputedStyle(document.getElementById('weather-chart')).height
+        // this.visitSize.width = window.getComputedStyle(document.getElementById('visit-chart')).width
+        // this.visitSize.height = window.getComputedStyle(document.getElementById('visit-chart')).height
+        // this.visitTimeSize.width = window.getComputedStyle(document.getElementById('visit-time-chart')).width
+        // this.visitTimeSize.height = window.getComputedStyle(document.getElementById('visit-time-chart')).height
+        this.weatherChart.resize()
+        this.visitChart.resize()
+        this.visitTimeChart.resize()
+        this.visitTrendChart.resize()
+      })
     this.initWeatherChart()
     this.initVisitChart()
     this.initVisitTimeChart()
@@ -518,6 +520,8 @@ export default {
           }
           .tip-title{
             background-color:#f2e3cc;
+            height:100px;
+            width:200px;
           }
         }
         .visit-trend-chart-wrap{
@@ -532,13 +536,28 @@ export default {
         .summary-wrap{
           width:25%;
           height:100%;
-          float:left;
+          float:right;
+          position:relative;
+          .summary-back{
+            position:absolute;
+            width:100%;
+            height:calc(100%);
+            background: rgba(0, 0, 0, 0) url('../../assets/img/bookmark.jpeg') !important ;
+            opacity: .4;
+          }
           .summary{
+            position:absolute;
             width:100%;
             height:calc(100% - 4px);
-            border:2px solid #f2e3cc;
-            background-image: url('../../assets/img/bookmark.jpeg');
             overflow: auto;
+            z-index: 12;
+            /*&::before{*/
+              /*position:absolute;*/
+              /*width:100%;*/
+              /*height:calc(100% - 4px);*/
+              /*background: rgba(0, 0, 0, 0) url('../../assets/img/bookmark.jpeg') !important ;*/
+              /*opacity: .4;*/
+            /*}*/
             &::-webkit-scrollbar{
               width:6px;
               height:1px;
