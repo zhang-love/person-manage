@@ -4,20 +4,22 @@ import Vue from 'cdn-vue'
 import router from './router'
 import App from './App'
 import VueParticles from 'vue-particles'
-// import echarts from '../static/js/echarts'
 import CommonJS from '@/assets/js'
 import '@/assets/style/index.less'
 import '@/assets/icon/iconfont.css'
 import ElementUI from 'cdn-element-ui'
+import axios from 'cdn-axios'
 import 'element-ui/lib/theme-chalk/index.css'
+// import echarts from '../static/js/echarts'
 // import animated from 'cdn-animate'
 // Vue.config.productionTip = false
 Vue.prototype.$commonJs = CommonJS
 Vue.use(VueParticles)
 // Vue.use(animated)
 Vue.use(ElementUI)
+Vue.prototype.$axios = axios
 // Vue.use(echarts)
-
+axios.defaults.baseURL = '/rest'
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

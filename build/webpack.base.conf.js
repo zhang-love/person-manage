@@ -32,6 +32,7 @@ module.exports = {
     'cdn-vue-router': 'VueRouter',
     'cdn-element-ui': 'ELEMENT',
     'cdn-axios': 'axios',
+    'cdn-qs': 'qs',
     'cdn-echarts': 'echarts',
     'cdn-animate': 'animate'
   },

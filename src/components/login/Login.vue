@@ -53,6 +53,7 @@
   </div>
 </template>
 <script>
+import {hello} from '../../assets/api/test'
 
 export default {
   name: 'Login',
@@ -83,6 +84,9 @@ export default {
     }
   },
   mounted () {
+    hello().then(res => {
+      console.log('res', res)
+    })
     const _this = this
     window.onresize = () => {
       _this.bodySize.height = window.innerHeight + 'px'
