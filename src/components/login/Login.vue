@@ -84,7 +84,7 @@ export default {
     }
   },
   mounted () {
-    hello().then(res => {
+    hello(1).then(res => {
       console.log('res', res)
     })
     const _this = this
