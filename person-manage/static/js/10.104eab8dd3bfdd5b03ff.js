@@ -1,0 +1,2 @@
+webpackJsonp([10],{DtZq:function(n,e){},V0yR:function(n,e,t){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var r={render:function(){var n=this.$createElement;return(this._self._c||n)("div",{},[this._v("\nsong-index\n")])},staticRenderFns:[]};var i=t("VU/8")({name:"Index",data:function(){return{}}},r,!1,function(n){t("DtZq")},null,null);e.default=i.exports}});
+//# sourceMappingURL=10.104eab8dd3bfdd5b03ff.js.map

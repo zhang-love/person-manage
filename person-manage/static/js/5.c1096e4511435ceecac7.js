@@ -1,0 +1,2 @@
+webpackJsonp([5],{"Z/Xe":function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r={render:function(){var e=this.$createElement;return(this._self._c||e)("div",{},[this._v("\n  blog-manage\n")])},staticRenderFns:[]};var a=t("VU/8")({name:"Edit",data:function(){return{}}},r,!1,function(e){t("eMnZ")},null,null);n.default=a.exports},eMnZ:function(e,n){}});
+//# sourceMappingURL=5.c1096e4511435ceecac7.js.map

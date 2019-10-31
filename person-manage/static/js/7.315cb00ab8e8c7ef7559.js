@@ -1,0 +1,2 @@
+webpackJsonp([7],{WIxD:function(n,e){},yG0i:function(n,e,t){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var r={render:function(){var n=this.$createElement;return(this._self._c||n)("div",{},[this._v("\n  song-manage\n")])},staticRenderFns:[]};var i=t("VU/8")({name:"Edit",data:function(){return{}}},r,!1,function(n){t("WIxD")},null,null);e.default=i.exports}});
+//# sourceMappingURL=7.315cb00ab8e8c7ef7559.js.map
