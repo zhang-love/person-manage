@@ -50,6 +50,12 @@
         </el-row>
       </div>
     </div>
+<!--    <form name="form1">-->
+<!--      <input type="text">-->
+<!--      <input type="radio" name="color" value="1">1-->
+<!--      <input type="radio" name="color" value="2">2-->
+<!--      <input type="submit" id="sub">提交-->
+<!--    </form>-->
   </div>
 </template>
 <script>
@@ -84,6 +90,22 @@ export default {
     }
   },
   mounted () {
+    function sub1 (a, b) {
+      return a - b
+    }
+    let handler = {
+      apply: function (obj, ctx, args) {
+        console.log('xx')
+        return Reflect.apply(...args)
+      }
+    }
+    let proxy = new Proxy(sub1, handler)
+    proxy(2, 1)
+    const sub = document.getElementById('sub')
+    sub.addEventListener('click', function (event) {
+      console.log('form', document.form1.elements)
+      event.preventDefault()
+    })
     hello(1).then(res => {
       console.log('res', res)
     })
@@ -94,6 +116,9 @@ export default {
       _this.bodySize.backgroundSize = window.innerWidth + 'px ' + window.innerHeight + 'px'
       _this.color = '#213188'
     }
+    window.addEventListener('beforeunload', function () {
+      alert('me')
+    })
   },
   methods: {
     login () {
