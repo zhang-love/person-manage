@@ -1,0 +1,2 @@
+webpackJsonp([3],{"3pDw":function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r={render:function(){var e=this.$createElement;return(this._self._c||e)("div",{},[this._v("\n  novel-manage\n")])},staticRenderFns:[]};var a=t("VU/8")({name:"Edit",data:function(){return{}}},r,!1,function(e){t("jx4R")},null,null);n.default=a.exports},jx4R:function(e,n){}});
+//# sourceMappingURL=3.280a0b7b9bffead58200.js.map
